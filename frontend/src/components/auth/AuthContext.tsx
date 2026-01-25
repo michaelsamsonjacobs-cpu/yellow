@@ -52,6 +52,18 @@ async function checkWhitelist(email: string | null): Promise<boolean> {
     }
 }
 
+
+function mapFirebaseUser(fbUser: FirebaseUser, isWhitelisted = false): User {
+    return {
+        id: fbUser.uid,
+        email: fbUser.email,
+        displayName: fbUser.displayName,
+        photoURL: fbUser.photoURL,
+        subscription_status: isWhitelisted ? 'active' : 'inactive',
+        newsletter_opt_in: false
+    };
+}
+
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
