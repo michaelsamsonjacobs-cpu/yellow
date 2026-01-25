@@ -23,7 +23,7 @@ export default function TopicPage({ params }: { params: { id: string } }) {
     useEffect(() => {
         if (params.id) {
             api.getTopicArticles(params.id)
-                .then((res) => setArticles(res.articles))
+                .then((res) => setArticles(res))
                 .catch(console.error)
                 .finally(() => setLoading(false));
         }
@@ -51,7 +51,7 @@ export default function TopicPage({ params }: { params: { id: string } }) {
                         <div style={{ textAlign: 'right', minWidth: '100px' }}>
                             <div
                                 className={`score-badge ${article.score >= 90 ? 'score-high' :
-                                        article.score >= 70 ? 'score-med' : 'score-low'
+                                    article.score >= 70 ? 'score-med' : 'score-low'
                                     }`}
                             >
                                 {article.score}
