@@ -1,0 +1,1 @@
+http://localhost:3000/auth/verify?token=8qqd1MtdQzCmSLkBHu1eOgaVVlk6dLlAf6kIaIec6GM
