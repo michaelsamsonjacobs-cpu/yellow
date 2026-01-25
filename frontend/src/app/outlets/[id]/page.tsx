@@ -3,19 +3,12 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { api } from '@/lib/api';
+import { Outlet } from '@/lib/firestore'; // Import Shared Type
 import { Card } from '@/components/ui/Card';
 import { Loader2 } from 'lucide-react';
 
-interface OutletDetail {
-    id: string;
-    name: string;
-    batting_average: number;
-    bias_tilt: number;
-    top_violations: { type: string; percentage: number }[];
-}
-
 export default function OutletDetailPage({ params }: { params: { id: string } }) {
-    const [outlet, setOutlet] = useState<OutletDetail | null>(null);
+    const [outlet, setOutlet] = useState<Outlet | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {

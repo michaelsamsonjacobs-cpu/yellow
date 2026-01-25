@@ -50,6 +50,9 @@ export interface Outlet {
     article_count: number;
     bias_label: string;
     last_updated: Date;
+    batting_average: number;
+    bias_tilt: number;
+    top_violations: { type: string; percentage: number }[];
 }
 
 // Helper to convert Firestore doc to typed object
@@ -91,6 +94,9 @@ function docToOutlet(doc: DocumentData): Outlet {
         article_count: data.article_count || 0,
         bias_label: data.bias_label || 'Unknown',
         last_updated: data.last_updated?.toDate() || new Date(),
+        batting_average: data.batting_average || 0,
+        bias_tilt: data.bias_tilt || 0,
+        top_violations: data.top_violations || [],
     };
 }
 
