@@ -3,15 +3,9 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { api } from '@/lib/api';
+import { Outlet } from '@/lib/firestore'; // Import Shared Type
 import { useAuth } from '@/components/auth/AuthContext';
 import { Loader2 } from 'lucide-react';
-
-interface Outlet {
-    id: string;
-    name: string;
-    batting_average: number;
-    total_articles: number;
-}
 
 export default function OutletsPage() {
     const { user } = useAuth();
@@ -106,7 +100,7 @@ export default function OutletsPage() {
                                         </div>
 
                                         <div className="flex justify-between items-center text-[10px] font-mono border-t border-white/10 pt-3">
-                                            <span className="text-white/60">{outlet.total_articles ?? 0} INTERCEPTS ANALYZED</span>
+                                            <span className="text-white/60">{outlet.article_count ?? 0} INTERCEPTS ANALYZED</span>
                                             {outlet.batting_average >= 90 && (
                                                 <span className="flex items-center gap-1 text-primary">
                                                     <span className="material-symbols-outlined text-[12px]">verified</span>
