@@ -37,7 +37,7 @@ export default function LandingPage() {
                     <div className="inline-block animate-[marquee_20s_linear_infinite] font-mono text-background-dark font-bold text-xs uppercase tracking-tighter" style={{ animation: 'marquee 20s linear infinite' }}>
                         <span className="mx-4">● NYT: <span className="underline">92</span></span>
                         <span className="mx-4">● FOX: <span className="underline">65</span></span>
-                        <span className="mx-4">● BBC: <span class="underline">88</span></span>
+                        <span className="mx-4">● BBC: <span className="underline">88</span></span>
                         <span className="mx-4">● AP: <span className="underline">94</span></span>
                         <span className="mx-4">● WSJ: <span className="underline">89</span></span>
                         <span className="mx-4">● REUTERS: <span className="underline">96</span></span>
