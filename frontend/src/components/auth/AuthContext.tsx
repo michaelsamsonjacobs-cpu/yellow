@@ -64,14 +64,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
                 setFirebaseUser(fbUser);
                 const isWhitelisted = await checkWhitelist(fbUser.email);
 
-                setUser({
-                    id: fbUser.uid,
-                    email: fbUser.email,
-                    displayName: fbUser.displayName,
-                    photoURL: fbUser.photoURL,
-                    subscription_status: isWhitelisted ? 'active' : 'inactive',
-                    newsletter_opt_in: false
-                });
+                setUser(mapFirebaseUser(fbUser, isWhitelisted));
             } else {
                 setFirebaseUser(null);
                 setUser(null);
