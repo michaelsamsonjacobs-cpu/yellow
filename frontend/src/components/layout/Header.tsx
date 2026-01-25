@@ -36,15 +36,9 @@ export function Header() {
                     gap: '1rem',
                     textDecoration: 'none'
                 }}>
-                    <img
-                        src="/logo-v2.png"
-                        alt="YELLOW"
-                        style={{
-                            height: '42px',
-                            width: 'auto',
-                            objectFit: 'contain'
-                        }}
-                    />
+                    <div className="font-display font-black text-3xl tracking-tighter bg-primary text-black px-2 py-0 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                        YELLOW
+                    </div>
                 </Link>
 
                 <nav style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>

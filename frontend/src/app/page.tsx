@@ -16,7 +16,7 @@ export default function LandingPage() {
                             Classified Document #772-B
                         </div>
                         <h1 className="text-5xl font-extrabold leading-[0.9] tracking-tighter">
-                            The News,<br />Redacted.
+                            The Signal,<br />Decoded.
                         </h1>
                         <p className="font-mono text-sm opacity-70 leading-relaxed max-w-[280px]">
                             Stripping bias from global media using high-fidelity intelligence protocols.
