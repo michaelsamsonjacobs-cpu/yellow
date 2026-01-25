@@ -9,6 +9,7 @@ from app.tasks.celery_app import celery_app
 from app.scraper.discovery import discover_daily_topics, DiscoveredTopic
 from app.db.database import AsyncSessionLocal
 from app.db.models import Topic
+from app.services.firestore_sync import sync_topic_to_firestore
 
 
 async def _store_topics(topics: list[DiscoveredTopic]) -> int:
@@ -26,6 +27,12 @@ async def _store_topics(topics: list[DiscoveredTopic]) -> int:
             )
             db.add(topic)
             count += 1
+            
+            # Sync to Firestore
+            try:
+                sync_topic_to_firestore(topic)
+            except Exception as e:
+                print(f"Firestore topic sync error: {e}")
         
         await db.commit()
         return count

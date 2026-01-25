@@ -13,6 +13,7 @@ from app.services.vectordb import store_article, query_historical_context, forma
 from app.db.database import AsyncSessionLocal
 from app.db.models import Article, Outlet, ScoringAudit
 from app.services.skew import SkewCalculator
+from app.services.firestore_sync import sync_article_to_firestore, sync_outlet_to_firestore
 
 
 async def _get_unscored_articles(limit: int = 100) -> list[Article]:
@@ -110,6 +111,13 @@ async def _score_single_article(article_id: str) -> bool:
             print(f"Vector storage error: {e}")
         
         await db.commit()
+        
+        # Sync to Firestore
+        try:
+            sync_article_to_firestore(article, outlet.name if outlet else "Unknown")
+        except Exception as e:
+            print(f"Firestore article sync error: {e}")
+            
         return True
 
 
@@ -147,6 +155,12 @@ async def _update_outlet_batting_average(outlet_id: str) -> None:
             outlet.batting_average = max(0, min(100, round(final_score, 1)))
             outlet.total_articles = total_articles
             await db.commit()
+            
+            # Sync to Firestore
+            try:
+                sync_outlet_to_firestore(outlet)
+            except Exception as e:
+                print(f"Firestore outlet sync error: {e}")
             
             if skew_penalty > 0:
                 print(f"  Applied skew penalty of -{skew_penalty} to {outlet.domain}")

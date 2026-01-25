@@ -43,8 +43,14 @@ export default function HowItWorksPage() {
 
                     <Card className="p-6" style={{ padding: '2rem' }}>
                         <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🤫</div>
-                        <h3>4. Bias by Omission (Bonus)</h3>
-                        <p>It’s not just about what they write; it’s about what they <em>don’t</em> write. Our <strong>Silence Detector</strong> compares real-time public interest (Google Trends, Reddit) against mainstream coverage. If the world is talking about a story but the major outlets are ignoring it, we flag it as an "Omission Gap."</p>
+                        <h3>4. Bias by Omission</h3>
+                        <p>It’s not just about what they write; it’s about what they <em>don’t</em> write. Our <strong>Silence Detector</strong> flags stories that the world is talking about but mainstream outlets are ignoring.</p>
+                    </Card>
+
+                    <Card className="p-6" style={{ padding: '2rem' }}>
+                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🌍</div>
+                        <h3>5. The UN Factor (Manual Skew)</h3>
+                        <p>We penalize "Selective Neutrality." A source that is neutral on sports and weather but carries extreme bias on foreign policy or elections is dinged with a <strong>Skew Penalty</strong>. We calculate variance across 20+ specific topics to find hidden agendas.</p>
                     </Card>
 
                 </div>
