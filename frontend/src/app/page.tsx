@@ -13,7 +13,7 @@ export default function LandingPage() {
                 <section className="relative px-6 pt-12 pb-8 border-b border-black dark:border-white/20">
                     <div className="space-y-6">
                         <div className="inline-block px-2 py-1 bg-primary text-background-dark font-mono text-[10px] font-bold tracking-widest uppercase">
-                            Classified Document #772-B
+                            Intelligence Dispatch // v1.0.4
                         </div>
                         <h1 className="text-5xl font-extrabold leading-[0.9] tracking-tighter">
                             The Signal,<br />Decoded.
