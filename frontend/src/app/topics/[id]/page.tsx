@@ -36,19 +36,19 @@ export default function TopicPage({ params }: { params: { id: string } }) {
                                 {article.outlet_name} • {formatDistanceToNow(new Date(article.published_at))} ago
                             </div>
                             <Link href={`/articles/${article.id}`} style={{ fontSize: '1.2rem', fontWeight: 'bold', fontFamily: 'var(--font-headline)' }}>
-                                {article.headline}
+                                {article.title}
                             </Link>
                         </div>
 
                         <div style={{ textAlign: 'right', minWidth: '100px' }}>
                             <div
-                                className={`score-badge ${article.score >= 90 ? 'score-high' :
-                                    article.score >= 70 ? 'score-med' : 'score-low'
+                                className={`score-badge ${article.integrity_score >= 90 ? 'score-high' :
+                                    article.integrity_score >= 70 ? 'score-med' : 'score-low'
                                     }`}
                             >
-                                {article.score}
+                                {article.integrity_score}
                             </div>
-                            {article.has_redraft && (
+                            {Boolean(article.redrafted_text) && (
                                 <div style={{ fontSize: '0.8rem', color: 'var(--color-red)', fontWeight: 'bold', marginTop: '0.25rem' }}>
                                     Violations Found
                                 </div>
