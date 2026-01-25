@@ -12,6 +12,7 @@ from app.services.redraft import generate_redraft, redraft_to_json
 from app.services.vectordb import store_article, query_historical_context, format_context_for_scoring
 from app.db.database import AsyncSessionLocal
 from app.db.models import Article, Outlet, ScoringAudit
+from app.services.skew import SkewCalculator
 
 
 async def _get_unscored_articles(limit: int = 100) -> list[Article]:
@@ -134,9 +135,21 @@ async def _update_outlet_batting_average(outlet_id: str) -> None:
         outlet = outlet_result.scalar_one_or_none()
         
         if outlet:
-            outlet.batting_average = round(avg_score, 1)
+            # Calculate "UN Factor" Skew Penalty
+            calculator = SkewCalculator(db)
+            skew_data = calculator.calculate_outlet_skew(outlet_id)
+            skew_penalty = skew_data.get("skew_penalty", 0)
+            
+            # Apply penalty
+            final_score = avg_score - skew_penalty
+            
+            # Ensure proper rounding and bounds (0-100)
+            outlet.batting_average = max(0, min(100, round(final_score, 1)))
             outlet.total_articles = total_articles
             await db.commit()
+            
+            if skew_penalty > 0:
+                print(f"  Applied skew penalty of -{skew_penalty} to {outlet.domain}")
 
 
 @celery_app.task(name="app.tasks.scoring.score_pending_articles")
