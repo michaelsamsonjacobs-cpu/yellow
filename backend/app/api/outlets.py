@@ -15,6 +15,7 @@ from app.schemas import (
     OutletHistoryResponse, OutletHistoryPoint, TopViolation
 )
 from app.api.deps import get_current_active_subscriber
+from app.services.skew import SkewCalculator
 
 router = APIRouter()
 
@@ -176,6 +177,20 @@ async def get_outlet(
         is_wire_service=outlet.is_wire_service,
         top_violations=top_violations
     )
+
+
+@router.get("/{outlet_id}/skew")
+async def get_outlet_skew(
+    outlet_id: UUID,
+    user: User = Depends(get_current_active_subscriber),
+    db: AsyncSession = Depends(get_db)
+):
+    """
+    Get outlet topic skew analysis ("UN Factor").
+    """
+    calculator = SkewCalculator(db)
+    skew_data = calculator.calculate_outlet_skew(outlet_id)
+    return skew_data
 
 
 @router.get("/{outlet_id}/history", response_model=OutletHistoryResponse)

@@ -39,6 +39,7 @@ export const api = {
     getOutlets: () => firestoreApi.getOutlets(),
     getOutlet: (outletId: string) => firestoreApi.getOutlet(outletId),
     getOutletHistory: (outletId: string) => firestoreApi.getOutletHistory(outletId),
+    getOutletSkew: (outletId: string) => fetcher(`/outlets/${outletId}/skew`),
 
     // Legacy REST endpoints (still needed for Stripe/payments)
     createCheckoutSession: () => fetcher('/user/subscribe', { method: 'POST' }),

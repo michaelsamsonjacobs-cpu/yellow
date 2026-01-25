@@ -162,6 +162,7 @@ class Article(Base):
     url: Mapped[str] = mapped_column(Text, unique=True, nullable=False, index=True)
     author: Mapped[Optional[str]] = mapped_column(String(255))
     published_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    category_tag: Mapped[Optional[str]] = mapped_column(String(50), index=True)  # From taxonomy
     
     # Scoring
     score: Mapped[Optional[int]] = mapped_column(Integer)  # 0-100

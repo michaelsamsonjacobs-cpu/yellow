@@ -6,15 +6,19 @@ import { api } from '@/lib/api';
 import { Outlet } from '@/lib/firestore'; // Import Shared Type
 import { Card } from '@/components/ui/Card';
 import { Loader2 } from 'lucide-react';
+import { SkewChart } from '@/components/analysis/SkewChart';
 
 export default function OutletDetailPage({ params }: { params: { id: string } }) {
     const [outlet, setOutlet] = useState<Outlet | null>(null);
+    const [skewData, setSkewData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (params.id) {
-            api.getOutlet(params.id)
-                .then(setOutlet)
+            Promise.all([
+                api.getOutlet(params.id).then(setOutlet),
+                api.getOutletSkew(params.id).then(setSkewData).catch(() => setSkewData(null))
+            ])
                 .catch(console.error)
                 .finally(() => setLoading(false));
         }
@@ -51,7 +55,7 @@ export default function OutletDetailPage({ params }: { params: { id: string } })
                     </div>
 
                     {outlet.top_violations && outlet.top_violations.length > 0 && (
-                        <div>
+                        <div className="mb-10">
                             <h3 style={{ borderBottom: '2px solid black', paddingBottom: '0.5rem', marginBottom: '1rem' }}>
                                 Frequent Violations
                             </h3>
@@ -66,6 +70,18 @@ export default function OutletDetailPage({ params }: { params: { id: string } })
                                     </div>
                                 ))}
                             </div>
+                        </div>
+                    )}
+
+                    {skewData && (
+                        <div>
+                            <div className="mb-6">
+                                <h3 className="text-xl font-bold mb-2">Topic Skew Analysis</h3>
+                                <p className="text-sm opacity-70">
+                                    Detecting "The UN Factor"—selective bias where an outlet is neutral on most topics but compromised on specific ones.
+                                </p>
+                            </div>
+                            <SkewChart data={skewData} />
                         </div>
                     )}
 

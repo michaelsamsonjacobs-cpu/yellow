@@ -19,6 +19,7 @@ from playwright.async_api import async_playwright, Page, Browser
 
 from app.config import get_settings
 from app.scraper.outlets import OutletConfig, get_outlet_config
+from app.scraper.taxonomy import TOPIC_CATEGORIES
 
 settings = get_settings()
 
@@ -40,6 +41,7 @@ class ScrapedArticle:
     author: Optional[str] = None
     published_at: Optional[datetime] = None
     outlet_domain: str = ""
+    category_tag: Optional[str] = None
 
 
 class ArticleScraper:
@@ -60,6 +62,24 @@ class ArticleScraper:
     def _get_random_user_agent(self) -> str:
         """Get random user agent for rotation"""
         return random.choice(USER_AGENTS)
+    
+    def classify_article(self, headline: str, body: str) -> Optional[str]:
+        """Classify article into taxonomy category based on keywords"""
+        text = (headline + " " + body).lower()
+        
+        best_category = None
+        max_matches = 0
+        
+        for category, config in TOPIC_CATEGORIES.items():
+            matches = sum(1 for keyword in config["keywords"] if keyword in text)
+            if matches > max_matches:
+                max_matches = matches
+                best_category = category
+                
+        # Only assign if we have a reasonable confidence (at least 2 keyword matches)
+        if max_matches >= 2:
+            return best_category
+        return None
     
     async def _init_browser(self) -> Browser:
         """Initialize Playwright browser"""
@@ -235,13 +255,16 @@ class ArticleScraper:
                 if not headline or not body:
                     return None
                 
+                category_tag = self.classify_article(headline, body)
+                
                 return ScrapedArticle(
                     url=url,
                     headline=headline,
                     body=body,
                     author=author,
                     published_at=published_at,
-                    outlet_domain=config.domain
+                    outlet_domain=config.domain,
+                    category_tag=category_tag
                 )
                 
             except Exception as e:
@@ -299,13 +322,16 @@ class ArticleScraper:
             if not headline or not body:
                 return None
             
+            category_tag = self.classify_article(headline, body)
+            
             return ScrapedArticle(
                 url=url,
                 headline=headline,
                 body=body,
                 author=author,
                 published_at=published_at,
-                outlet_domain=config.domain
+                outlet_domain=config.domain,
+                category_tag=category_tag
             )
             
         except Exception as e:
