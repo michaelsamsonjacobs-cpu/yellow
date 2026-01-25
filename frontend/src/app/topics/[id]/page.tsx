@@ -3,18 +3,10 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { api } from '@/lib/api';
+import { Article } from '@/lib/firestore'; // Import Shared Type
 import { Card } from '@/components/ui/Card';
 import { Loader2 } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
-
-interface Article {
-    id: string;
-    headline: string;
-    score: number;
-    outlet_name: string;
-    published_at: string;
-    has_redraft: boolean;
-}
 
 export default function TopicPage({ params }: { params: { id: string } }) {
     const [articles, setArticles] = useState<Article[]>([]);
