@@ -21,36 +21,36 @@ export default function HowItWorksPage() {
             {/* The Rubric */}
             <section style={{ marginBottom: '6rem' }}>
                 <h2 style={{ textAlign: 'center', marginBottom: '3rem' }}>The Scoring Rubric</h2>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
 
-                    <Card className="p-6" style={{ padding: '2rem' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🔍</div>
-                        <h3>1. Verification (40%)</h3>
-                        <p>Does the story rely on single sources? Are official narratives challenged? We deduct points for anonymous sourcing without explanation and unverified claims.</p>
+                    <Card className="p-6" style={{ padding: '1.5rem' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🔍</div>
+                        <h3 className="text-sm font-bold">1. Verification (40%)</h3>
+                        <p className="text-xs">Does the story rely on single sources? Are official narratives challenged? We deduct points for anonymous sourcing and unverified claims.</p>
                     </Card>
 
-                    <Card className="p-6" style={{ padding: '2rem' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚖️</div>
-                        <h3>2. Neutrality (30%)</h3>
-                        <p>We flag "loaded language"—words chosen to evoke emotion rather than inform (e.g., "blasts," "scheme," "disastrous"). Facts should speak for themselves.</p>
+                    <Card className="p-6" style={{ padding: '1.5rem' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>⚖️</div>
+                        <h3 className="text-sm font-bold">2. Neutrality (30%)</h3>
+                        <p className="text-xs">We flag "loaded language"—words chosen to evoke emotion rather than inform. Facts should speak for themselves without editorial spin.</p>
                     </Card>
 
-                    <Card className="p-6" style={{ padding: '2rem' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🤝</div>
-                        <h3>3. Fairness (30%)</h3>
-                        <p>Are opposing views represented? Is there a right of reply? Does the headline match the story? We ensure the reporting is complete and honest.</p>
+                    <Card className="p-6" style={{ padding: '1.5rem' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🤝</div>
+                        <h3 className="text-sm font-bold">3. Fairness (30%)</h3>
+                        <p className="text-xs">Are opposing views represented? Does the headline match the story? We ensure the reporting is complete, balanced, and honest.</p>
                     </Card>
 
-                    <Card className="p-6" style={{ padding: '2rem' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🤫</div>
-                        <h3>4. Bias by Omission</h3>
-                        <p>It’s not just about what they write; it’s about what they <em>don’t</em> write. Our <strong>Silence Detector</strong> flags stories that the world is talking about but mainstream outlets are ignoring.</p>
+                    <Card className="p-6" style={{ padding: '1.5rem' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🤫</div>
+                        <h3 className="text-sm font-bold">4. Bias by Omission</h3>
+                        <p className="text-xs">It’s not just about what they write; it’s about what they <em>don’t</em> write. Our <strong>Silence Detector</strong> flags stories mainstream outlets are ignoring.</p>
                     </Card>
 
-                    <Card className="p-6" style={{ padding: '2rem' }}>
-                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🌍</div>
-                        <h3>5. The UN Factor (Manual Skew)</h3>
-                        <p>We penalize "Selective Neutrality." A source that is neutral on sports and weather but carries extreme bias on foreign policy or elections is dinged with a <strong>Skew Penalty</strong>. We calculate variance across 20+ specific topics to find hidden agendas.</p>
+                    <Card className="p-6" style={{ padding: '1.5rem' }}>
+                        <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🌍</div>
+                        <h3 className="text-sm font-bold">5. Topic Skew Analysis</h3>
+                        <p className="text-xs">We penalize "Selective Neutrality." We calculate variance across 20+ specific topics to find hidden agendas where an outlet is neutral on most topics but biased on others.</p>
                     </Card>
 
                 </div>

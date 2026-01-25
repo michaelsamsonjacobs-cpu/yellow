@@ -143,7 +143,7 @@ async def _update_outlet_batting_average(outlet_id: str) -> None:
         outlet = outlet_result.scalar_one_or_none()
         
         if outlet:
-            # Calculate "UN Factor" Skew Penalty
+            # Calculate Topic Skew Penalty
             calculator = SkewCalculator(db)
             skew_data = calculator.calculate_outlet_skew(outlet_id)
             skew_penalty = skew_data.get("skew_penalty", 0)

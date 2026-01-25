@@ -78,7 +78,7 @@ export default function OutletDetailPage({ params }: { params: { id: string } })
                             <div className="mb-6">
                                 <h3 className="text-xl font-bold mb-2">Topic Skew Analysis</h3>
                                 <p className="text-sm opacity-70">
-                                    Detecting "The UN Factor"—selective bias where an outlet is neutral on most topics but compromised on specific ones.
+                                    Detecting selective bias where an outlet remains neutral on most topics but compromised on specific ones.
                                 </p>
                             </div>
                             <SkewChart data={skewData} />

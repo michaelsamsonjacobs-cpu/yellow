@@ -186,7 +186,7 @@ async def get_outlet_skew(
     db: AsyncSession = Depends(get_db)
 ):
     """
-    Get outlet topic skew analysis ("UN Factor").
+    Get outlet topic skew analysis.
     """
     calculator = SkewCalculator(db)
     skew_data = calculator.calculate_outlet_skew(outlet_id)
